@@ -1,6 +1,6 @@
 -- Change autoUpdate to false if you wish to not receive auto updates.
 -- Change silentUpdate to true if you wish not to receive any message regarding updates
-local autoUpdate   = false
+local autoUpdate   = true
 local silentUpdate = false
 
 local version = 0.1
@@ -22,7 +22,7 @@ if not sourceLibFound then return end
 
 -- Updater
 if autoUpdate then
-    SourceUpdater(scriptName, version, "raw.github.com", "/TheRealSource/public/master/KnowYourEnemy.lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/TheRealSource/public/master/KnowYourEnemy.version"):SetSilent(silentUpdate):CheckUpdate()
+    SourceUpdater(scriptName, version, "raw.github.com", "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/TheRealSource/public/master/KnowYourEnemy.version"):SetSilent(silentUpdate):CheckUpdate()
 end
 
 
