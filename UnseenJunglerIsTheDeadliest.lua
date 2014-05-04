@@ -22,7 +22,7 @@ if not sourceLibFound then return end
 
 -- Updater
 if autoUpdate then
-    SourceUpdater(scriptName, version, "raw.github.com", "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/TheRealSource/public/master/KnowYourEnemy.version"):SetSilent(silentUpdate):CheckUpdate()
+    SourceUpdater(scriptName, version, "raw.github.com", "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.version"):SetSilent(silentUpdate):CheckUpdate()
 end
 
 
