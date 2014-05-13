@@ -61,7 +61,7 @@ function OnCreateObj(object)
 	if object ~= nil and object.name ~= nil and object.team ~= hero.team then
 		for _, obj in pairs(objectsToAdd) do
 			if object.name == obj.name then
-				print("Found ward of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
+				print("Found ward " .. object.name .. " of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
 				local tick = GetTickCount()
 				table.insert(hiddenObjectList, {objData = obj, objObject = object, seenTick = tick, x = object.pos.x, y = object.pos.y, z = object.pos.z})
 				
@@ -75,7 +75,7 @@ function OnProcessSpell(unit, spell)
 	if spell ~= nil and spell.team ~= hero.team  then
 		for _, obj in pairs(spellsToAdd) do
 			if spell.name == obj.spellName then
-				print("Found spell of team: " .. tostring(spell.team) .. " Your team: " .. tostring(player.team))
+				print("Found spell " .. object.name .. " of team: " .. tostring(spell.team) .. " Your team: " .. tostring(player.team))
 				local tick = GetTickCount()
 				table.insert(hiddenObjectList, {objData = obj, objObject = spell, seenTick = tick, x = spell.endPos.x, y = spell.endPos.y, z = spell.endPos.z})
 
@@ -92,7 +92,7 @@ function OnDeleteObj(object)
 				for f, obj in pairs(hiddenObjectList) do
 					if obj.x == object.x and obj.z == object.z then
 						table.remove(hiddenObjectList, f)
-						print("Deleted ward of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
+						print("Deleted ward " .. object.name .. " of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
 					end
 				end
 			end
@@ -103,7 +103,7 @@ function OnDeleteObj(object)
 				for f, obj in pairs(hiddenObjectList) do
 					if obj.x == object.x and obj.z == object.z then
 						table.remove(hiddenObjectList, f)
-						print("Deleted spell of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
+						print("Deleted spell " .. object.name .. " of team: " .. tostring(object.team) .. " Your team: " .. tostring(player.team))
 					end			
 				end
 			end		
