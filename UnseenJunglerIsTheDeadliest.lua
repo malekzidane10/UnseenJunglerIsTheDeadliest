@@ -75,7 +75,7 @@ function OnProcessSpell(unit, spell)
 	if spell ~= nil and spell.team ~= hero.team  then
 		for _, obj in pairs(spellsToAdd) do
 			if spell.name == obj.spellName then
-				print("Found spell " .. object.name .. " of team: " .. tostring(spell.team) .. " Your team: " .. tostring(player.team))
+				print("Found spell " .. spell.name .. " of team: " .. tostring(spell.team) .. " Your team: " .. tostring(player.team))
 				local tick = GetTickCount()
 				table.insert(hiddenObjectList, {objData = obj, objObject = spell, seenTick = tick, x = spell.endPos.x, y = spell.endPos.y, z = spell.endPos.z})
 
