@@ -174,7 +174,7 @@ function OnDraw()
 			end
 			
 			if DCConfig.ObjectsOnMinimap then
-				local minimapPosition = GetMinimap(obj.objObject)
+				local minimapPosition = GetMinimap(obj.x, obj.z)
 				DrawTextWithBorder('.', 60, minimapPosition.x - 3, minimapPosition.y - 43, obj.objData.color, RGB(0,0,0))
 			end
 		
