@@ -180,7 +180,7 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 1 then
 			
 				renderObjectText(obj)
-				if IsKeyDown(DCConfig.visionKey) and mouseOver(obj.x, obj.z, 100) then
+				if DCConfig.visionKey and mouseOver(obj.x, obj.z, 100) then
 					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
 					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
@@ -191,7 +191,7 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 2 then
 				
 				renderObjectText(obj)
-				if IsKeyDown(DCConfig.visionKey) then
+				if DCConfig.visionKey then
 					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
 					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
@@ -238,7 +238,7 @@ function OnDraw()
 	end
 	
 	
-	if not IsKeyDown(DCConfig.visionKey) then return end
+	if not DCConfig.visionKey then return end
 	if DCConfig.EnemyVisionMode == 3 then return end
 
 	
