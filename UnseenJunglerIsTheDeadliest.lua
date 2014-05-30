@@ -35,7 +35,7 @@ if autoUpdate then
 end
 ]]
 
-
+local visionKeyCode = 84
 
 local towers = {}
 local showTowersMode = 1
@@ -128,7 +128,7 @@ end
 
 function OnLoad()
 	
-	print("[---] FUTURE SCRIPT Unseen Jungler is the deadliest, version: " .. tostring(version) .. " [---]")
+	print("[---] FUTURE SCRIPT: Unseen Jungler is the deadliest [---]")
 	
 	DCConfig = scriptConfig("Unseen Jungler is the deadliest", "UJISTD")
 	DCConfig:addParam("TowerMode", "Show Towers", SCRIPT_PARAM_LIST, 3, {"Closeby", "All", "None" })
@@ -170,7 +170,7 @@ function OnDraw()
 		
 			if DCConfig.HiddenObjectMode == 3 then
 				renderObjectText(obj)
-				DrawCircle(obj.x, obj.y, obj.z, 100, obj.objData.color)	
+				DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)	
 			end
 			
 			if DCConfig.ObjectsOnMinimap then
@@ -181,10 +181,10 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 1 then
 			
 				renderObjectText(obj)
-				if IsKeyDown(18) and mouseOver(obj.x, obj.z, 100) then
-					DrawCircle(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
+				if IsKeyDown(visionKeyCode) and mouseOver(obj.x, obj.z, 100) then
+					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
-					DrawCircle(obj.x, obj.y, obj.z, 100, obj.objData.color)
+					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
 				end
 				
 			end
@@ -192,10 +192,10 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 2 then
 				
 				renderObjectText(obj)
-				if IsKeyDown(18) then
-					DrawCircle(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
+				if IsKeyDown(visionKeyCode) then
+					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
-					DrawCircle(obj.x, obj.y, obj.z, 100, obj.objData.color)
+					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
 				end			
 			end
 		
@@ -218,6 +218,9 @@ function OnDraw()
 					if tower.team ~= myHero.team then
 						col = RGB(dis, 0, 0)
 					end
+					if dis > 0 then
+						DrawCircle2(tower.x, tower.y, tower.z, 950, col)
+					end
 				end
 				
 				if DCConfig.TowerMode == 2 then
@@ -225,12 +228,9 @@ function OnDraw()
 					if tower.team ~= myHero.team then
 						col = RGB(255, 0, 0)
 					end
+					DrawCircle2(tower.x, tower.y, tower.z, 950, col)
 				end
-				
-				
-				if DCConfig.TowerMode < 3 then
-				DrawCircle(tower.x, tower.y, tower.z, 950, col)
-				end
+
 				
 			else
 				table.remove(towers, f)
@@ -239,7 +239,7 @@ function OnDraw()
 	end
 	
 	
-	if not IsKeyDown(18) then return end
+	if not IsKeyDown(visionKeyCode) then return end
 	if DCConfig.EnemyVisionMode == 3 then return end
 
 	
@@ -248,13 +248,13 @@ function OnDraw()
 		if minion ~= nil and minion.visible then
 		
 			if DCConfig.EnemyVisionMode == 1 then
-				DrawCircle(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
+				DrawCircle2(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
 				if mouseOver(minion.x, minion.z, DCConfig.SelectionSize) then
-					DrawCircle(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
+					DrawCircle2(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
 				end
 			end
 			if DCConfig.EnemyVisionMode == 2 then
-				DrawCircle(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
+				DrawCircle2(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
 			end
 			
 		end
@@ -265,13 +265,13 @@ function OnDraw()
 		if enemy ~= nil and enemy.health > 0 and enemy.visible then
 		
 			if DCConfig.EnemyVisionMode == 1 then
-				DrawCircle(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
+				DrawCircle2(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
 				if mouseOver(enemy.x, enemy.z, DCConfig.SelectionSize) then
-					DrawCircle(enemy.x, enemy.y, enemy.z, 1450, RGB(200, 200, 200))
+					DrawCircle2(enemy.x, enemy.y, enemy.z, 1450, RGB(200, 200, 200))
 				end
 			end
 			if DCConfig.EnemyVisionMode == 2 then
-				DrawCircle(enemy.x, enemy.y, enemy.z, 1250, 0x00DD00FF)
+				DrawCircle2(enemy.x, enemy.y, enemy.z, 1250, 0x00DD00FF)
 			end
 			
 		end
@@ -340,3 +340,37 @@ function DrawTextWithBorder(textToDraw, textSize, x, y, textColor, backgroundCol
         DrawText(textToDraw, textSize, x, y + 1, backgroundColor)
         DrawText(textToDraw, textSize, x , y, textColor)
 end
+
+
+
+
+--[[Low fps circles by barasia, vadash and viseversa]]--
+function DrawCircle2NextLvl(x, y, z, radius, width, color, chordlength)
+    radius = radius or 300
+		quality = math.max(8,round(180/math.deg((math.asin((chordlength/(2*radius)))))))
+		quality = 2 * math.pi / quality
+		radius = radius*.92
+    local points = {}
+    for theta = 0, 2 * math.pi + quality, quality do
+        local c = WorldToScreen(D3DXVECTOR3(x + radius * math.cos(theta), y, z - radius * math.sin(theta)))
+        points[#points + 1] = D3DXVECTOR2(c.x, c.y)
+    end
+    DrawLines2(points, width or 1, color or 4294967295)
+end
+
+
+function round(num) 
+	if num >= 0 then return math.floor(num+.5) else return math.ceil(num-.5) end
+end
+
+
+function DrawCircle22(x, y, z, radius, color)
+    local vPos1 = Vector(x, y, z)
+    local vPos2 = Vector(cameraPos.x, cameraPos.y, cameraPos.z)
+    local tPos = vPos1 - (vPos1 - vPos2):normalized() * radius
+    local sPos = WorldToScreen(D3DXVECTOR3(tPos.x, tPos.y, tPos.z))
+    if OnScreen({ x = sPos.x, y = sPos.y }, { x = sPos.x, y = sPos.y }) then
+        DrawCircle2NextLvl(x, y, z, radius, 1, color, 75)	
+    end
+end
+--[[/Low fps circles by barasia, vadash and viseversa]]--
