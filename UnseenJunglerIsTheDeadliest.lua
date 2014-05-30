@@ -35,8 +35,6 @@ if autoUpdate then
 end
 ]]
 
-local visionKeyCode = 84
-
 local towers = {}
 local showTowersMode = 1
 local col
@@ -136,7 +134,8 @@ function OnLoad()
 	DCConfig:addParam("SelectionSize", "Vision circle selection size", SCRIPT_PARAM_SLICE, 451, 50, 750, 50)
 	DCConfig:addParam("HiddenObjectMode", "Hidden objects vision range", SCRIPT_PARAM_LIST, 3, {"Mouseover", "All", "None" })	
 	DCConfig:addParam("ObjectsOnMinimap", "Show objects on minimap", SCRIPT_PARAM_ONOFF, false, 32)
-	
+	DCConfig:addParam("visionKey", "Render Vision Key", SCRIPT_PARAM_ONKEYDOWN, false, string.byte("T"))
+
 	-- find all towers
 	for i = 1, objManager.iCount, 1 do
         local obj = objManager:getObject(i)
@@ -181,7 +180,7 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 1 then
 			
 				renderObjectText(obj)
-				if IsKeyDown(visionKeyCode) and mouseOver(obj.x, obj.z, 100) then
+				if IsKeyDown(DCConfig.visionKey) and mouseOver(obj.x, obj.z, 100) then
 					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
 					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
@@ -192,7 +191,7 @@ function OnDraw()
 			if DCConfig.HiddenObjectMode == 2 then
 				
 				renderObjectText(obj)
-				if IsKeyDown(visionKeyCode) then
+				if IsKeyDown(DCConfig.visionKey) then
 					DrawCircle2(obj.x, obj.y, obj.z, obj.objData.range, obj.objData.color)
 				else
 					DrawCircle2(obj.x, obj.y, obj.z, 100, obj.objData.color)
@@ -239,7 +238,7 @@ function OnDraw()
 	end
 	
 	
-	if not IsKeyDown(visionKeyCode) then return end
+	if not IsKeyDown(DCConfig.visionKey) then return end
 	if DCConfig.EnemyVisionMode == 3 then return end
 
 	
