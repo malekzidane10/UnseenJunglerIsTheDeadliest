@@ -44,19 +44,19 @@ local DCConfig
 
 local hiddenObjectList = {}
 local objectsToAdd = {
-	{ name = "VisionWard", objectType = "wards", spellName = "VisionWard", color = RGB(150, 0, 150), range = 1350, duration = 200000, icon = "yellowPoint"},
-	{ name = "SightWard", objectType = "wards", spellName = "SightWard", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
-	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinket", color = RGB(150, 150, 0), range = 1350, duration = 60000, icon = "greenPoint"},
-	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinketUpgrade", color = RGB(150, 150, 0), range = 1350, duration = 120000, icon = "greenPoint"},
-	{ name = "VisionWard", objectType = "wards", spellName = "SightWard", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
-	{ name = "SightWard", objectType = "wards", spellName = "wrigglelantern", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
+	{ name = "VisionWard", objectType = "wards", spellName = "VisionWard", color = RGBA(150, 0, 150, 150), range = 1350, duration = 200000, icon = "yellowPoint"},
+	{ name = "SightWard", objectType = "wards", spellName = "SightWard", color = RGBA(150, 150, 0, 150), range = 1350, duration = 180000, icon = "greenPoint"},
+	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinket", color = RGBA(150, 150, 0, 150), range = 1350, duration = 60000, icon = "greenPoint"},
+	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinketUpgrade", color = RGBA(150, 150, 0, 150), range = 1350, duration = 120000, icon = "greenPoint"},
+	{ name = "VisionWard", objectType = "wards", spellName = "SightWard", color = RGBA(150, 150, 0, 150), range = 1350, duration = 180000, icon = "greenPoint"},
+	{ name = "SightWard", objectType = "wards", spellName = "wrigglelantern", color = RGBA(150, 150, 0, 150), range = 1350, duration = 180000, icon = "greenPoint"},
 }
 
 local spellsToAdd = {
-	{ name = "Jack In The Box", objectType = "boxes", spellName = "JackInTheBox", color = 0x00FF0000, range = 300, duration = 60000, icon = "redPoint"},
-	{ name = "Cupcake Trap", objectType = "traps", spellName = "CaitlynYordleTrap", color = 0x00FF0000, range = 300, duration = 240000, icon = "cyanPoint"},
-	{ name = "Noxious Trap", objectType = "traps", spellName = "Bushwhack", color = 0x00FF0000, range = 300, duration = 240000, icon = "cyanPoint"},
-	{ name = "Noxious Trap", objectType = "traps", spellName = "BantamTrap", color = 0x00FF0000, range = 300, duration = 600000, icon = "cyanPoint"},
+	{ name = "Jack In The Box", objectType = "boxes", spellName = "JackInTheBox", color = RGBA(255, 0, 0, 150), range = 300, duration = 60000, icon = "redPoint"},
+	{ name = "Cupcake Trap", objectType = "traps", spellName = "CaitlynYordleTrap", color = RGBA(255, 0, 0, 150), range = 300, duration = 240000, icon = "cyanPoint"},
+	{ name = "Noxious Trap", objectType = "traps", spellName = "Bushwhack", color = RGBA(255, 0, 0, 150), range = 300, duration = 240000, icon = "cyanPoint"},
+	{ name = "Noxious Trap", objectType = "traps", spellName = "BantamTrap", color = RGBA(255, 0, 0, 150), range = 300, duration = 600000, icon = "cyanPoint"},
 	-- to confirm
 	--{ name = "MaokaiSproutling", objectType = "boxes", spellName = "MaokaiSapling2", color = 0x00FF0000, range = 300, duration = 35000, icon = "redPoint"}
 }
@@ -158,7 +158,7 @@ function renderObjectText(obj)
 		secLeft = tostring(secLeft)
 	end
 			
-	DrawText3D(minLeft..":"..secLeft,obj.x,obj.y,obj.z, 16, RGB(255,255,255), true)
+	DrawText3D(minLeft..":"..secLeft,obj.x,obj.y,obj.z, 16, RGBA(255,255,255,255), true)
 end
 
 
@@ -213,9 +213,9 @@ function OnDraw()
 					if dis < 0 then dis = 0 end	
 					dis = dis/3000*255
 					
-					col = RGB(0, dis, 0)
+					col = RGBA(0, 255, 0, dis)
 					if tower.team ~= myHero.team then
-						col = RGB(dis, 0, 0)
+						col = RGBA(255, 0, 0, dis)
 					end
 					if dis > 0 then
 						DrawCircle2(tower.x, tower.y, tower.z, 950, col)
@@ -223,9 +223,9 @@ function OnDraw()
 				end
 				
 				if DCConfig.TowerMode == 2 then
-					col = RGB(0, 255, 0)
+					col = RGBA(0, 255, 0, 255)
 					if tower.team ~= myHero.team then
-						col = RGB(255, 0, 0)
+						col = RGBA(255, 0, 0, 255)
 					end
 					DrawCircle2(tower.x, tower.y, tower.z, 950, col)
 				end
@@ -249,11 +249,11 @@ function OnDraw()
 			if DCConfig.EnemyVisionMode == 1 then
 				DrawCircle2(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
 				if mouseOver(minion.x, minion.z, DCConfig.SelectionSize) then
-					DrawCircle2(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
+					DrawCircle2(minion.x, minion.y, minion.z, 1250, RGBA(0, 255, 255, 130))
 				end
 			end
 			if DCConfig.EnemyVisionMode == 2 then
-				DrawCircle2(minion.x, minion.y, minion.z, 1250, 0x00DD00FF)
+				DrawCircle2(minion.x, minion.y, minion.z, 1250, RGBA(0, 255, 255, 130))
 			end
 			
 		end
@@ -266,11 +266,11 @@ function OnDraw()
 			if DCConfig.EnemyVisionMode == 1 then
 				DrawCircle2(mousePos.x, mousePos.y, mousePos.z, DCConfig.SelectionSize, RGB(200, 0, 200));
 				if mouseOver(enemy.x, enemy.z, DCConfig.SelectionSize) then
-					DrawCircle2(enemy.x, enemy.y, enemy.z, 1450, RGB(200, 200, 200))
+					DrawCircle2(enemy.x, enemy.y, enemy.z, 1450, RGBA(255, 255, 0, 150))
 				end
 			end
 			if DCConfig.EnemyVisionMode == 2 then
-				DrawCircle2(enemy.x, enemy.y, enemy.z, 1250, 0x00DD00FF)
+				DrawCircle2(enemy.x, enemy.y, enemy.z, 1250, RGBA(255, 255, 0, 150))
 			end
 			
 		end
