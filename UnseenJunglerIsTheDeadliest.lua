@@ -363,7 +363,7 @@ function round(num)
 end
 
 
-function DrawCircle22(x, y, z, radius, color)
+function DrawCircle2(x, y, z, radius, color)
     local vPos1 = Vector(x, y, z)
     local vPos2 = Vector(cameraPos.x, cameraPos.y, cameraPos.z)
     local tPos = vPos1 - (vPos1 - vPos2):normalized() * radius
