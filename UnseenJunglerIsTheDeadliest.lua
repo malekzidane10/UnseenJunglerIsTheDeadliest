@@ -48,7 +48,7 @@ local objectsToAdd = {
 	{ name = "SightWard", objectType = "wards", spellName = "SightWard", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
 	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinket", color = RGB(150, 150, 0), range = 1350, duration = 60000, icon = "greenPoint"},
 	{ name = "SightWard", objectType = "wards", spellName = "YellowTrinketUpgrade", color = RGB(150, 150, 0), range = 1350, duration = 120000, icon = "greenPoint"},
-	{ name = "VisionWards", objectType = "wards", spellName = "SightWard", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
+	{ name = "VisionWard", objectType = "wards", spellName = "SightWard", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
 	{ name = "SightWard", objectType = "wards", spellName = "wrigglelantern", color = RGB(150, 150, 0), range = 1350, duration = 180000, icon = "greenPoint"},
 }
 
