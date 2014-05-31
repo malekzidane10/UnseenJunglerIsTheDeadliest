@@ -1,39 +1,24 @@
---[[
-	FUTURE SCRIPT a14.31.1215.8742
-	J4's Unseen jungler is the deadliest 
-	
-	
-	Copy-pasterino code however you want!
-	
-	
-	F1 to switch tower-mode!
-	Hold down ALT to see vision radii of enemies and objects
-	
-]]
-local version = 0.1
---[[
--- Change autoUpdate to false if you wish to not receive auto updates.
-local autoUpdate   = true
 
-local scriptName = "UnseenJunglerIsTheDeadliest"
+require "SourceLib"
 
+-------------Updater-------------
 
--- SourceLib auto download
-local sourceLibFound = true
-if FileExist(LIB_PATH .. "SourceLib.lua") then
-    require "SourceLib"
-else
-    sourceLibFound = false
-    DownloadFile("https://raw.github.com/TheRealSource/public/master/common/SourceLib.lua", LIB_PATH .. "SourceLib.lua", function() print("<font color=\"#6699ff\"><b>" .. scriptName .. ":</b></font> <font color=\"#FFFFFF\">SourceLib downloaded! Please reload!</font>") end)
+local UPDATE_HOST      = "raw.github.com"
+local UPDATE_PATH      = "/gnomgrol/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.lua"
+local VERSION_PATH     = "/gnomgrol/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.version"
+local UPDATE_FILE_PATH = SCRIPT_PATH..GetCurrentEnv().FILE_NAME
+local UPDATE_URL       = "https://"..UPDATE_HOST..UPDATE_PATH
+local SCRIPT_NAME      = "Unseen Jungler Is TheDeadliest"
+
+local version = 0.2
+local AUTOUPDATE = true
+
+if AUTOUPDATE then
+	 SourceUpdater(SCRIPT_NAME, version, UPDATE_HOST, UPDATE_PATH, UPDATE_FILE_PATH, VERSION_PATH):CheckUpdate()
 end
--- Return if SourceLib has to be downloaded
-if not sourceLibFound then return end
 
--- Updater
-if autoUpdate then
-    SourceUpdater(scriptName, version, "raw.github.com", "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/UnseenJunglerIsTheDeadliest/master/UnseenJunglerIsTheDeadliest.version"):SetSilent(silentUpdate):CheckUpdate()
-end
-]]
+
+
 
 local towers = {}
 local showTowersMode = 1
